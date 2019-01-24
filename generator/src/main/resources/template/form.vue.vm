@@ -1,0 +1,102 @@
+<template>
+  <article>
+    <sticky className="sub-navbar draft">
+      <el-button type="success" @click="save">保存</el-button>
+    </sticky>
+
+    <section class="app-container">
+      <el-form ref="form" :model="form" label-width="100px" style="width: 600px">
+        #foreach($column in $columns)
+          #if($column.columnName != $pk.columnName && $column.columnName != 'create_time' && $column.columnName != 'update_time' && $column.columnName != 'del_flag' )
+              <el-form-item label="${column.comments}">
+                  #if($column.dataType == 'date')
+                  <el-date-picker
+                          v-model="form.${column.attrname}"
+                          type="date"
+                          format="yyyy-MM-dd"
+                          value-format="yyyy-MM-dd"
+                          placeholder="选择日期">
+                  </el-date-picker>
+                  #elseif($column.dataType == 'tinyint')
+                  <el-radio-group v-model="form.${column.attrname}">
+                      <el-radio label="1">启用</el-radio>
+                      <el-radio label="0">禁用</el-radio>
+                  </el-radio-group>
+                  #else
+                  <el-input v-model="form.${column.attrname}" placeholder="${column.comments}"></el-input>
+                  #end
+              </el-form-item>
+          #end
+        #end
+      </el-form>
+    </section>
+  </article>
+</template>
+
+<script>
+  import Sticky from '@/components/Sticky'
+
+  export default {
+    name: '${classname}Form',
+    data() {
+      return {
+        form: {
+        },
+      }
+    },
+    components: {
+      Sticky
+    },
+    computed: {
+    },
+    mounted() {
+      if (this.$route.params.${pk.attrname}) {
+        this.get(this.$route.params.${pk.attrname})
+      }
+    },
+    methods: {
+      async save () {
+        /*
+        if (!this.form.name) {
+           this.#[[$message]]#.error('名称不能为空')
+           return
+         }
+         */
+
+        let res = {}
+        if (this.form.${pk.attrname}) {
+            res = await this.#[[$store]]#.api.newReq('/${moduleName}/${pathName}/update').post(this.form)
+        } else {
+            res = await this.#[[$store]]#.api.newReq('/${moduleName}/${pathName}/save').post(this.form)
+        }
+        if (res.code === 0) {
+          this.#[[$message]]#({
+            type: 'success',
+            message: '保存成功',
+            duration: 1500,
+            onClose: async ()=>{
+              await this.#[[$store]]#.dispatch('delVisitedViews', {path: this.#[[$router]]#.currentRoute.path})
+              this.#[[$router]]#.replace('/${moduleName}/${pathName}/list')
+            }
+          })
+        } else {
+          this.#[[$message]]#.error(res.msg)
+        }
+      },
+      async get (${pk.attrname}) {
+        let res = await this.#[[$store]]#.api.newReq('/${moduleName}/${pathName}/info/' + ${pk.attrname}).get()
+        if (res.code == 0) {
+          this.form = res.data
+        } else {
+          this.#[[$message]]#.error(res.msg)
+        }
+      }
+    },
+    created() {
+    }
+  }
+</script>
+
+<style scoped>
+</style>
+

@@ -1,0 +1,50 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    druid:
+      first:  #数据源1
+        url: jdbc:mysql://prod-db-ip:3306/opsbackend?useSSL=false&useUnicode=yes&characterEncoding=UTF-8
+        username: root
+        password: 123456
+        second:  #数据源1
+          url: jdbc:mysql://prod-db-ip:3306/terminal?useSSL=false&useUnicode=yes&characterEncoding=UTF-8
+          username: root
+          password: 123456
+      initial-size: 10
+      max-active: 100
+      min-idle: 10
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      #validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        #login-username: admin
+        #login-password: admin
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: false
+        wall:
+          config:
+            multi-statement-allow: true
+  redis:
+      database: 0
+      host: 35.154.107.230
+      port: 6379
+      password:      # 密码（默认为空）
+      timeout: 6000ms  # 连接超时时长（毫秒）
+
+logging:
+  level: error
+  level.com.quasar.backend: error
+  path: logs/
+  file: admin_error.log
