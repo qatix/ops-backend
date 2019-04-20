@@ -32,7 +32,7 @@ public class PhoneController {
      * 列表
      */
     @RequestMapping("/list")
-//    @RequiresPermissions("base:phone:list")
+    @RequiresPermissions("base:phone:list")
     public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = phoneService.queryPage(params);
         return R.ok().put("data", page);
@@ -44,11 +44,11 @@ public class PhoneController {
     @GetMapping("/all")
     public R getPhoneListByChannel(@RequestParam Map<String, Object> params) {
         String channel = (String) params.get("selectedChannel");
-
-        PhoneEntity phoneEntity =  new PhoneEntity();
-        phoneEntity.setChannel("chan").setCode("code-"+System.currentTimeMillis()).setType(PhoneType.FEATURE_PHONE).setDescription("desc");
-        System.out.println(phoneEntity.toString());
-        phoneService.save(phoneEntity);
+//
+//        PhoneEntity phoneEntity =  new PhoneEntity();
+//        phoneEntity.setChannel("chan").setCode("code-"+System.currentTimeMillis()).setType(PhoneType.FEATURE_PHONE).setDescription("desc");
+//        System.out.println(phoneEntity.toString());
+//        phoneService.save(phoneEntity);
 
 
         List<PhoneEntity> phoneList = null;
@@ -61,7 +61,7 @@ public class PhoneController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-//    @RequiresPermissions("base:phone:info")
+    @RequiresPermissions("base:phone:info")
     public R info(@PathVariable("id") Integer id) {
         PhoneEntity phone = phoneService.getById(id);
 
@@ -72,7 +72,7 @@ public class PhoneController {
      * 保存
      */
     @RequestMapping("/save")
-//    @RequiresPermissions("base:phone:save")
+    @RequiresPermissions("base:phone:save")
     public R save(@RequestBody PhoneEntity phone) {
         phoneService.save(phone);
 
@@ -83,7 +83,7 @@ public class PhoneController {
      * 修改
      */
     @RequestMapping("/update")
-//    @RequiresPermissions("base:phone:update")
+    @RequiresPermissions("base:phone:update")
     public R update(@RequestBody PhoneEntity phone) {
         System.out.println("update:"+phone.toString());
         ValidatorUtils.validateEntity(phone);
@@ -96,7 +96,7 @@ public class PhoneController {
      * 删除
      */
     @RequestMapping("/delete")
-//    @RequiresPermissions("base:phone:delete")
+    @RequiresPermissions("base:phone:delete")
     public R delete(@RequestBody Integer[] ids) {
         phoneService.removeByIds(Arrays.asList(ids));
 

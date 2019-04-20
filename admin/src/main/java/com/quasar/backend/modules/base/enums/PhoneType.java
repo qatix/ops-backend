@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.enums.IEnum;
 public enum PhoneType {
     UNKNOWN(0, "未知"),
     FEATURE_PHONE(4, "功能机"),
-    START_PHONE(5, "智能机");
+    SMART_PHONE(5, "智能机");
 
     @EnumValue
     private final Integer value;
