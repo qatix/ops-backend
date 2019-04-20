@@ -4,8 +4,9 @@ $(function () {
         datatype: "json",
         colModel: [			
 			{ label: 'id', name: 'id', index: 'id', width: 50, key: true },
-			{ label: '渠道', name: 'channel', index: 'channel', width: 80 }, 			
-			{ label: '机型代码', name: 'code', index: 'code', width: 80 }, 			
+			{ label: '渠道', name: 'channel', index: 'channel', width: 80 },
+            { label: 'Type', name: 'type', index: 'type', width: 80 },
+            { label: '机型代码', name: 'code', index: 'code', width: 80 },
 			{ label: '描述', name: 'description', index: 'description', width: 80 }, 			
 			{ label: '创建时间', name: 'createTime', index: 'create_time', width: 80 }, 			
 			{ label: '更新时间', name: 'updateTime', index: 'update_time', width: 80 }			

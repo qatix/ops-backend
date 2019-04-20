@@ -43,7 +43,7 @@ public class SysCommonController extends AbstractController {
     }
 
     private List getAllDepts() {
-        List<SysDeptEntity> deptList = sysDeptService.selectList(null);
+        List<SysDeptEntity> deptList = sysDeptService.list();
 
         List<Map<String, Object>> resList = new ArrayList<>(deptList.size());
         for (SysDeptEntity dept : deptList) {
@@ -57,7 +57,7 @@ public class SysCommonController extends AbstractController {
     }
 
     private List getAllUsers() {
-        List<SysUserEntity> userList = sysUserService.selectList(
+        List<SysUserEntity> userList = sysUserService.list(
                 new QueryWrapper<SysUserEntity>().eq("status", 1)
         );
 

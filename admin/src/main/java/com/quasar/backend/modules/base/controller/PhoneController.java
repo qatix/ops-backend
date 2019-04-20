@@ -5,6 +5,7 @@ import com.quasar.backend.common.utils.PageUtils;
 import com.quasar.backend.common.utils.R;
 import com.quasar.backend.common.validator.ValidatorUtils;
 import com.quasar.backend.modules.base.entity.PhoneEntity;
+import com.quasar.backend.modules.base.enums.PhoneType;
 import com.quasar.backend.modules.base.service.PhoneService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class PhoneController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("base:phone:list")
+//    @RequiresPermissions("base:phone:list")
     public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = phoneService.queryPage(params);
         return R.ok().put("data", page);
@@ -43,8 +44,15 @@ public class PhoneController {
     @GetMapping("/all")
     public R getPhoneListByChannel(@RequestParam Map<String, Object> params) {
         String channel = (String) params.get("selectedChannel");
+
+        PhoneEntity phoneEntity =  new PhoneEntity();
+        phoneEntity.setChannel("chan").setCode("code-"+System.currentTimeMillis()).setType(PhoneType.FEATURE_PHONE).setDescription("desc");
+        System.out.println(phoneEntity.toString());
+        phoneService.save(phoneEntity);
+
+
         List<PhoneEntity> phoneList = null;
-        phoneList = phoneService.selectList(
+        phoneList = phoneService.list(
                 new QueryWrapper<PhoneEntity>().eq("channel", channel));
         return R.ok().put("data", phoneList);
     }
@@ -53,9 +61,9 @@ public class PhoneController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("base:phone:info")
+//    @RequiresPermissions("base:phone:info")
     public R info(@PathVariable("id") Integer id) {
-        PhoneEntity phone = phoneService.selectById(id);
+        PhoneEntity phone = phoneService.getById(id);
 
         return R.ok().put("data", phone);
     }
@@ -64,9 +72,9 @@ public class PhoneController {
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("base:phone:save")
+//    @RequiresPermissions("base:phone:save")
     public R save(@RequestBody PhoneEntity phone) {
-        phoneService.insert(phone);
+        phoneService.save(phone);
 
         return R.ok();
     }
@@ -75,8 +83,9 @@ public class PhoneController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("base:phone:update")
+//    @RequiresPermissions("base:phone:update")
     public R update(@RequestBody PhoneEntity phone) {
+        System.out.println("update:"+phone.toString());
         ValidatorUtils.validateEntity(phone);
         phoneService.updateById(phone);//全部更新
 
@@ -87,9 +96,9 @@ public class PhoneController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("base:phone:delete")
+//    @RequiresPermissions("base:phone:delete")
     public R delete(@RequestBody Integer[] ids) {
-        phoneService.deleteBatchIds(Arrays.asList(ids));
+        phoneService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

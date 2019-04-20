@@ -45,7 +45,7 @@ public class SysDeptController extends AbstractController {
     @RequestMapping("/tree")
     @RequiresPermissions("sys:dept:list")
     public R tree() {
-        List<SysDeptEntity> deptList = sysDeptService.selectList(null);
+        List<SysDeptEntity> deptList = sysDeptService.list();
 
         List<Map<String, Object>> resList = new ArrayList<>(deptList.size());
         for (SysDeptEntity dept : deptList) {
@@ -111,7 +111,7 @@ public class SysDeptController extends AbstractController {
     @RequestMapping("/info/{deptId}")
     @RequiresPermissions("sys:dept:info")
     public R info(@PathVariable("deptId") Long deptId) {
-        SysDeptEntity dept = sysDeptService.selectById(deptId);
+        SysDeptEntity dept = sysDeptService.getById(deptId);
 
         return R.ok().put("data", dept);
     }
@@ -122,7 +122,7 @@ public class SysDeptController extends AbstractController {
     @RequestMapping("/save")
     @RequiresPermissions("sys:dept:save")
     public R save(@RequestBody SysDeptEntity dept) {
-        sysDeptService.insert(dept);
+        sysDeptService.save(dept);
 
         return R.ok();
     }
@@ -148,7 +148,7 @@ public class SysDeptController extends AbstractController {
         if (null == deptId) {
             return R.error("部门ID为空");
         } else {
-            SysDeptEntity dept = sysDeptService.selectById(deptId);
+            SysDeptEntity dept = sysDeptService.getById(deptId);
             if (null == dept) {
                 return R.error("部门不存在");
             }
@@ -160,7 +160,7 @@ public class SysDeptController extends AbstractController {
             return R.error("请先删除子部门");
         }
 
-        sysDeptService.deleteById(deptId);
+        sysDeptService.removeById(deptId);
 
         return R.ok();
     }

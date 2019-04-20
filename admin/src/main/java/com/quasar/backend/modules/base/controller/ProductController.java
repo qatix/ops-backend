@@ -43,7 +43,7 @@ public class ProductController {
     @GetMapping("/info/{id}")
     @RequiresPermissions("base:product:info")
     public R info(@PathVariable("id") Integer id){
-        ProductEntity product = productService.selectById(id);
+        ProductEntity product = productService.getById(id);
 
         return R.ok().put("data", product);
     }
@@ -54,7 +54,7 @@ public class ProductController {
     @PostMapping("/save")
     @RequiresPermissions("base:product:save")
     public R save(@RequestBody ProductEntity product){
-        productService.insert(product);
+        productService.save(product);
 
         return R.ok();
     }
@@ -77,7 +77,7 @@ public class ProductController {
     @PostMapping("/delete")
     @RequiresPermissions("base:product:delete")
     public R delete(@RequestBody Integer[] ids){
-        productService.deleteBatchIds(Arrays.asList(ids));
+        productService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

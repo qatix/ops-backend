@@ -18,7 +18,7 @@ public class ProductServiceImpl extends ServiceImpl<ProductDao, ProductEntity> i
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        IPage<ProductEntity> page = this.selectPage(
+        IPage<ProductEntity> page = this.page(
                 new Query<ProductEntity>(params).getPage(),
                 new QueryWrapper<ProductEntity>()
         );

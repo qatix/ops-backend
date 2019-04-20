@@ -27,12 +27,12 @@ public interface SysUserService extends IService<SysUserEntity> {
     /**
      * 保存用户
      */
-    void save(SysUserEntity user);
+    void saveOne(SysUserEntity user);
 
     /**
      * 修改用户
      */
-    void update(SysUserEntity user);
+    void updateOne(SysUserEntity user);
 
     /**
      * 修改密码

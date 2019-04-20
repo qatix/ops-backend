@@ -20,11 +20,11 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptDao, SysDeptEntity> i
     @DataFilter(subDept = true, user = false)
     public List<SysDeptEntity> queryList(Map<String, Object> params) {
         List<SysDeptEntity> deptList =
-                this.selectList(new QueryWrapper<>()
+                this.list(new QueryWrapper<>()
                 );
 
         for (SysDeptEntity sysDeptEntity : deptList) {
-            SysDeptEntity parentDeptEntity = this.selectById(sysDeptEntity.getParentId());
+            SysDeptEntity parentDeptEntity = this.getById(sysDeptEntity.getParentId());
             if (parentDeptEntity != null) {
                 sysDeptEntity.setParentName(parentDeptEntity.getName());
             }

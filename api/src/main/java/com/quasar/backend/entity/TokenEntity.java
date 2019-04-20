@@ -25,6 +25,7 @@ public class TokenEntity implements Serializable {
 	 */
 	@TableId(type=IdType.INPUT)
 	private Long userId;
+
 	private String token;
 	/**
 	 * 过期时间

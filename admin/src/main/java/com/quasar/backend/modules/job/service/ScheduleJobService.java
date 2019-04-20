@@ -19,12 +19,12 @@ public interface ScheduleJobService extends IService<ScheduleJobEntity> {
     /**
      * 保存定时任务
      */
-    void save(ScheduleJobEntity scheduleJob);
+    void saveOne(ScheduleJobEntity scheduleJob);
 
     /**
      * 更新定时任务
      */
-    void update(ScheduleJobEntity scheduleJob);
+    void updateOne(ScheduleJobEntity scheduleJob);
 
     /**
      * 批量删除定时任务

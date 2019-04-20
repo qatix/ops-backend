@@ -41,7 +41,7 @@ public class ScheduleJobController {
     @RequestMapping("/info/{jobId}")
     @RequiresPermissions("sys:schedule:info")
     public R info(@PathVariable("jobId") Long jobId) {
-        ScheduleJobEntity schedule = scheduleJobService.selectById(jobId);
+        ScheduleJobEntity schedule = scheduleJobService.getById(jobId);
 
         return R.ok().put("data", schedule);
     }
@@ -55,7 +55,7 @@ public class ScheduleJobController {
     public R save(@RequestBody ScheduleJobEntity scheduleJob) {
         ValidatorUtils.validateEntity(scheduleJob);
 
-        scheduleJobService.save(scheduleJob);
+        scheduleJobService.saveOne(scheduleJob);
 
         return R.ok();
     }
@@ -69,7 +69,7 @@ public class ScheduleJobController {
     public R update(@RequestBody ScheduleJobEntity scheduleJob) {
         ValidatorUtils.validateEntity(scheduleJob);
 
-        scheduleJobService.update(scheduleJob);
+        scheduleJobService.updateOne(scheduleJob);
 
         return R.ok();
     }

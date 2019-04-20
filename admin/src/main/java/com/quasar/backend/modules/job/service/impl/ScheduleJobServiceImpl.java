@@ -31,7 +31,7 @@ public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobDao, Schedule
      */
 //	@PostConstruct
 //	public void init(){
-//		List<ScheduleJobEntity> scheduleJobList = this.selectList(null);
+//		List<ScheduleJobEntity> scheduleJobList = this.list();
 //		for(ScheduleJobEntity scheduleJob : scheduleJobList){
 //			CronTrigger cronTrigger = ScheduleUtils.getCronTrigger(scheduler, scheduleJob.getJobId());
 //            //如果不存在，则创建
@@ -46,7 +46,7 @@ public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobDao, Schedule
     public PageUtils queryPage(Map<String, Object> params) {
         String beanName = (String) params.get("beanName");
 
-        IPage<ScheduleJobEntity> page = this.selectPage(
+        IPage<ScheduleJobEntity> page = this.page(
                 new Query<ScheduleJobEntity>(params).getPage(),
                 new QueryWrapper<ScheduleJobEntity>().like(StringUtils.isNotBlank(beanName), "bean_name", beanName)
         );
@@ -57,17 +57,17 @@ public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobDao, Schedule
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void save(ScheduleJobEntity scheduleJob) {
+    public void saveOne(ScheduleJobEntity scheduleJob) {
         scheduleJob.setCreateTime(new Date());
         scheduleJob.setStatus(Constant.ScheduleStatus.NORMAL.getValue());
-        this.insert(scheduleJob);
+        this.save(scheduleJob);
 
         ScheduleUtils.createScheduleJob(scheduler, scheduleJob);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void update(ScheduleJobEntity scheduleJob) {
+    public void updateOne(ScheduleJobEntity scheduleJob) {
         ScheduleUtils.updateScheduleJob(scheduler, scheduleJob);
 
         this.updateById(scheduleJob);
@@ -81,7 +81,7 @@ public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobDao, Schedule
         }
 
         //删除数据
-        this.deleteBatchIds(Arrays.asList(jobIds));
+        this.removeByIds(Arrays.asList(jobIds));
     }
 
     @Override
@@ -96,7 +96,7 @@ public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobDao, Schedule
     @Transactional(rollbackFor = Exception.class)
     public void run(Long[] jobIds) {
         for (Long jobId : jobIds) {
-            ScheduleUtils.run(scheduler, this.selectById(jobId));
+            ScheduleUtils.run(scheduler, this.getById(jobId));
         }
     }
 

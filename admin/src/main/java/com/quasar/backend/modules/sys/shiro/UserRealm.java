@@ -9,6 +9,7 @@ import com.quasar.backend.modules.sys.dao.SysUserRoleDao;
 import com.quasar.backend.modules.sys.dto.SysUserRole;
 import com.quasar.backend.modules.sys.entity.SysMenuEntity;
 import com.quasar.backend.modules.sys.entity.SysUserEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
@@ -32,9 +33,9 @@ import java.util.*;
  * @email sunlightcs@gmail.com
  * @date 2016年11月10日 上午11:55:49
  */
+@Slf4j
 @Component
 public class UserRealm extends AuthorizingRealm {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizingRealm.class);
 
     @Resource
     private SysUserDao sysUserDao;
@@ -48,7 +49,7 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        LOGGER.info("doGetAuthorizationInfo:principals");
+        log.info("doGetAuthorizationInfo:principals");
 
         SysUserEntity user = (SysUserEntity) principals.getPrimaryPrincipal();
         Long userId = user.getId();
@@ -93,10 +94,10 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken authcToken) throws AuthenticationException {
-        LOGGER.info("doGetAuthenticationInfo:" + authcToken);
+        log.info("doGetAuthenticationInfo:" + authcToken);
 
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-        LOGGER.info("doGetAuthenticationInfo - token:" + token.toString());
+        log.info("doGetAuthenticationInfo - token:" + token.toString());
 
         //查询用户信息
         SysUserEntity user;

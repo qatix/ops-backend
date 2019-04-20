@@ -3,7 +3,9 @@ package com.quasar.backend.modules.base.entity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.quasar.backend.modules.base.enums.PhoneType;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,6 +18,7 @@ import java.util.Date;
  * @date 2018-08-27 18:02:48
  */
 @Data
+@Accessors(chain = true)
 @TableName("n_phone")
 public class PhoneEntity implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -30,6 +33,10 @@ public class PhoneEntity implements Serializable {
      * 机型代码
      */
     private String code;
+    /**
+     * 类型
+     */
+    private PhoneType type;
     /**
      * 描述
      */

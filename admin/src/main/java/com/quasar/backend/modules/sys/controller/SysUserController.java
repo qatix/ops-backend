@@ -56,7 +56,7 @@ public class SysUserController extends AbstractController {
      */
     @RequestMapping("/info")
     public R info() {
-        SysUserEntity user = sysUserService.selectById(getUser().getId());
+        SysUserEntity user = sysUserService.getById(getUser().getId());
 
         //获取用户所属的角色列表
         List<Long> roleIdList = sysUserRoleService.queryRoleIdList(user.getId());
@@ -93,10 +93,10 @@ public class SysUserController extends AbstractController {
     @RequestMapping("/info/{userId}")
     @RequiresPermissions("sys:user:info")
     public R info(@PathVariable("userId") Long userId) {
-        SysUserEntity user = sysUserService.selectById(userId);
+        SysUserEntity user = sysUserService.getById(userId);
 //
 //        if (user.getDeptId() != null) {
-//            SysDeptEntity deptEntity = sysDeptService.selectById(user.getDeptId());
+//            SysDeptEntity deptEntity = sysDeptService.getById(user.getDeptId());
 //            if (null != deptEntity) {
 //                user.setDeptName(deptEntity.getName());
 //            }
@@ -118,7 +118,7 @@ public class SysUserController extends AbstractController {
     public R save(@RequestBody SysUserEntity user) {
         ValidatorUtils.validateEntity(user, AddGroup.class);
 
-        sysUserService.save(user);
+        sysUserService.saveOne(user);
 
         return R.ok();
     }
@@ -132,7 +132,7 @@ public class SysUserController extends AbstractController {
     public R update(@RequestBody SysUserEntity user) {
         ValidatorUtils.validateEntity(user, UpdateGroup.class);
 
-        sysUserService.update(user);
+        sysUserService.updateOne(user);
 
         return R.ok();
     }
@@ -152,7 +152,7 @@ public class SysUserController extends AbstractController {
             return R.error("当前用户不能删除");
         }
 
-        sysUserService.deleteBatchIds(Arrays.asList(userIds));
+        sysUserService.removeByIds(Arrays.asList(userIds));
 
         return R.ok();
     }

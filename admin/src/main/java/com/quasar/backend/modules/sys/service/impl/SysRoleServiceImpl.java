@@ -43,14 +43,14 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
     public PageUtils queryPage(Map<String, Object> params) {
         String roleName = (String) params.get("roleName");
 
-        IPage<SysRoleEntity> page = this.selectPage(
+        IPage<SysRoleEntity> page = this.page(
                 new Query<SysRoleEntity>(params).getPage(),
                 new QueryWrapper<SysRoleEntity>()
                         .like(StringUtils.isNotBlank(roleName), "name", roleName)
         );
 
         for (SysRoleEntity sysRoleEntity : page.getRecords()) {
-            SysDeptEntity sysDeptEntity = sysDeptService.selectById(sysRoleEntity.getDeptId());
+            SysDeptEntity sysDeptEntity = sysDeptService.getById(sysRoleEntity.getDeptId());
             if (sysDeptEntity != null) {
                 sysRoleEntity.setDeptName(sysDeptEntity.getName());
             }
@@ -61,9 +61,9 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void save(SysRoleEntity role) {
+    public void saveOne(SysRoleEntity role) {
         role.setCreateTime(new Date());
-        this.insert(role);
+        this.save(role);
 
         //保存角色与菜单关系
         sysRoleMenuService.saveOrUpdate(role.getId(), role.getMenuIdList());
@@ -74,7 +74,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void update(SysRoleEntity role) {
+    public void updateOne(SysRoleEntity role) {
         this.updateById(role);
 
         //更新角色与菜单关系
@@ -88,7 +88,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRoleEntity> i
     @Transactional(rollbackFor = Exception.class)
     public void deleteBatch(Long[] roleIds) {
         //删除角色
-        this.deleteBatchIds(Arrays.asList(roleIds));
+        this.removeByIds(Arrays.asList(roleIds));
 
         //删除角色与菜单关联
         sysRoleMenuService.deleteBatch(roleIds);

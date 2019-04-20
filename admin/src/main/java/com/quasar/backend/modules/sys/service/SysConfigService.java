@@ -21,12 +21,12 @@ public interface SysConfigService extends IService<SysConfigEntity> {
     /**
      * 保存配置信息
      */
-    public void save(SysConfigEntity config);
+    public void saveOne(SysConfigEntity config);
 
     /**
      * 更新配置信息
      */
-    public void update(SysConfigEntity config);
+    public void updateOne(SysConfigEntity config);
 
     /**
      * 根据key，更新value

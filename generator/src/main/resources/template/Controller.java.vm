@@ -44,7 +44,7 @@ public class ${className}Controller {
     @GetMapping("/info/{${pk.attrname}}")
     @RequiresPermissions("${moduleName}:${pathName}:info")
     public R info(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}){
-        ${className}Entity ${classname} = ${classname}Service.selectById(${pk.attrname});
+        ${className}Entity ${classname} = ${classname}Service.getById(${pk.attrname});
 
         return R.ok().put("data", ${classname});
     }
@@ -55,7 +55,7 @@ public class ${className}Controller {
     @PostMapping("/save")
     @RequiresPermissions("${moduleName}:${pathName}:save")
     public R save(@RequestBody ${className}Entity ${classname}){
-        ${classname}Service.insert(${classname});
+        ${classname}Service.save(${classname});
 
         return R.ok();
     }
@@ -78,7 +78,7 @@ public class ${className}Controller {
     @PostMapping("/delete")
     @RequiresPermissions("${moduleName}:${pathName}:delete")
     public R delete(@RequestBody ${pk.attrType}[] ${pk.attrname}s){
-        ${classname}Service.deleteBatchIds(Arrays.asList(${pk.attrname}s));
+        ${classname}Service.removeByIds(Arrays.asList(${pk.attrname}s));
 
         return R.ok();
     }

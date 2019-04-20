@@ -40,7 +40,7 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuDao, SysRoleM
 
             list.add(sysRoleMenuEntity);
         }
-        this.insertBatch(list);
+        this.saveBatch(list);
     }
 
     @Override

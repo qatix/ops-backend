@@ -17,7 +17,7 @@ public class SysOssServiceImpl extends ServiceImpl<SysOssDao, SysOssEntity> impl
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        IPage<SysOssEntity> page = this.selectPage(
+        IPage<SysOssEntity> page = this.page(
                 new Query<SysOssEntity>(params).getPage(),
                 null
         );

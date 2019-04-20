@@ -20,7 +20,7 @@ public class TokenServiceImpl extends ServiceImpl<TokenDao, TokenEntity> impleme
 
 	@Override
 	public TokenEntity queryByToken(String token) {
-		return this.selectOne(new QueryWrapper<TokenEntity>().eq("token", token));
+		return this.getOne(new QueryWrapper<TokenEntity>().eq("token", token));
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class TokenServiceImpl extends ServiceImpl<TokenDao, TokenEntity> impleme
 		tokenEntity.setToken(token);
 		tokenEntity.setUpdateTime(now);
 		tokenEntity.setExpireTime(expireTime);
-		this.insertOrUpdate(tokenEntity);
+		this.saveOrUpdate(tokenEntity);
 
 		return tokenEntity;
 	}
@@ -52,7 +52,7 @@ public class TokenServiceImpl extends ServiceImpl<TokenDao, TokenEntity> impleme
 		tokenEntity.setUserId(userId);
 		tokenEntity.setUpdateTime(now);
 		tokenEntity.setExpireTime(now);
-		this.insertOrUpdate(tokenEntity);
+		this.saveOrUpdate(tokenEntity);
 	}
 
 	private String generateToken(){

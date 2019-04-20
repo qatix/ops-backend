@@ -40,7 +40,7 @@ public class SysRoleDeptServiceImpl extends ServiceImpl<SysRoleDeptDao, SysRoleD
 
             list.add(sysRoleDeptEntity);
         }
-        this.insertBatch(list);
+        this.saveBatch(list);
     }
 
     @Override

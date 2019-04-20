@@ -28,7 +28,7 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigDao, SysConfigEnt
     public PageUtils queryPage(Map<String, Object> params) {
         String paramKey = (String) params.get("paramKey");
 
-        IPage<SysConfigEntity> page = this.selectPage(
+        IPage<SysConfigEntity> page = this.page(
                 new Query<SysConfigEntity>(params).getPage(),
                 new QueryWrapper<SysConfigEntity>()
                         .like(StringUtils.isNotBlank(paramKey), "param_key", paramKey)
@@ -39,14 +39,14 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigDao, SysConfigEnt
     }
 
     @Override
-    public void save(SysConfigEntity config) {
-        this.insert(config);
+    public void saveOne(SysConfigEntity config) {
+        this.save(config);
         sysConfigRedis.saveOrUpdate(config);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void update(SysConfigEntity config) {
+    public void updateOne(SysConfigEntity config) {
         this.updateById(config);
         sysConfigRedis.saveOrUpdate(config);
     }
@@ -62,11 +62,11 @@ public class SysConfigServiceImpl extends ServiceImpl<SysConfigDao, SysConfigEnt
     @Transactional(rollbackFor = Exception.class)
     public void deleteBatch(Long[] ids) {
         for (Long id : ids) {
-            SysConfigEntity config = this.selectById(id);
+            SysConfigEntity config = this.getById(id);
             sysConfigRedis.delete(config.getParamKey());
         }
 
-        this.deleteBatchIds(Arrays.asList(ids));
+        this.removeByIds(Arrays.asList(ids));
     }
 
     @Override

@@ -59,4 +59,6 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
     call-setters-on-nulls: true
+#    default-enum-type-handler: org.apache.ibatis.type.
+  type-enums-package: com.quasar.backend.modules.base.enums
 

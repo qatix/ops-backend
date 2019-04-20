@@ -50,7 +50,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
         String username = (String) params.get("username");
         String email = (String) params.get("email");
 
-        IPage<SysUserEntity> page = this.selectPage(
+        IPage<SysUserEntity> page = this.page(
                 new Query<SysUserEntity>(params).getPage(),
                 new QueryWrapper<SysUserEntity>()
                         .like(StringUtils.isNotBlank(username), "username", username)
@@ -58,7 +58,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
         );
 
         for (SysUserEntity sysUserEntity : page.getRecords()) {
-            SysDeptEntity sysDeptEntity = sysDeptService.selectById(sysUserEntity.getDeptId());
+            SysDeptEntity sysDeptEntity = sysDeptService.getById(sysUserEntity.getDeptId());
             sysUserEntity.setDeptName(sysDeptEntity.getName());
         }
 
@@ -67,13 +67,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void save(SysUserEntity user) {
+    public void saveOne(SysUserEntity user) {
         user.setCreateTime(new Date());
         //sha256加密
         String salt = RandomStringUtils.randomAlphanumeric(20);
         user.setSalt(salt);
         user.setPassword(ShiroUtils.sha256(user.getPassword(), user.getSalt()));
-        this.insert(user);
+        this.save(user);
 
         //保存用户与角色关系
         sysUserRoleService.saveOrUpdate(user.getId(), user.getRoleIdList());
@@ -81,7 +81,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void update(SysUserEntity user) {
+    public void updateOne(SysUserEntity user) {
         if (StringUtils.isBlank(user.getPassword())) {
             user.setPassword(null);
         } else {

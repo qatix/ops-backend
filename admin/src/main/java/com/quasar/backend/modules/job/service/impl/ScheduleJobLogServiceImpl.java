@@ -20,7 +20,7 @@ public class ScheduleJobLogServiceImpl extends ServiceImpl<ScheduleJobLogDao, Sc
     public PageUtils queryPage(Map<String, Object> params) {
         String jobId = (String) params.get("jobId");
 
-        IPage<ScheduleJobLogEntity> page = this.selectPage(
+        IPage<ScheduleJobLogEntity> page = this.page(
                 new Query<ScheduleJobLogEntity>(params).getPage(),
                 new QueryWrapper<ScheduleJobLogEntity>().like(StringUtils.isNotBlank(jobId), "job_id", jobId)
         );

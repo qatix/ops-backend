@@ -37,7 +37,7 @@ public class CommonController {
      */
     @RequestMapping("/country_list")
     public R getCountryList() {
-        List<CountryEntity> countryEntityList = countryService.selectList(null);
+        List<CountryEntity> countryEntityList = countryService.list();
         List resList = countryEntityList.stream().map(item -> {
             Map<String, Object> channel = new HashMap<>();
             channel.put("id", item.getCode());
@@ -55,7 +55,7 @@ public class CommonController {
      */
     @RequestMapping("/model_list")
     public R getModelList() {
-        List<PhoneEntity> phoneEntityList = phoneService.selectList(null);
+        List<PhoneEntity> phoneEntityList = phoneService.list();
         List resList = phoneEntityList.stream().map(item -> {
             Map<String, Object> channel = new HashMap<>();
             String code = item.getCode().replace('_', ' ');
@@ -74,7 +74,7 @@ public class CommonController {
     @DataSource(name = DsEnum.TERMINAL)
     @RequestMapping("/model_list2")
     public R getModelList2() {
-        List<PhoneEntity> phoneEntityList = phoneService.selectList(null);
+        List<PhoneEntity> phoneEntityList = phoneService.list();
         List resList = phoneEntityList.stream().map(item -> {
             Map<String, Object> channel = new HashMap<>();
             String code = item.getCode().replace('_', ' ');

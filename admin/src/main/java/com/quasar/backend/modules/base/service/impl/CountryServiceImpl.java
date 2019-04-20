@@ -21,7 +21,7 @@ public class CountryServiceImpl extends ServiceImpl<CountryDao, CountryEntity> i
     public PageUtils queryPage(Map<String, Object> params) {
         String name = (String) params.get("name");
 
-        IPage<CountryEntity> page = this.selectPage(
+        IPage<CountryEntity> page = this.page(
                 new Query<CountryEntity>(params).getPage(),
                 new QueryWrapper<CountryEntity>()
                         .like(StringUtils.isNotBlank(name), "zh_name", name)

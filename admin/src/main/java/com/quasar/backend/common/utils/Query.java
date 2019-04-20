@@ -55,9 +55,9 @@ public class Query<T> extends LinkedHashMap<String, Object> {
         //排序
         if (StringUtils.isNotBlank(sidx) && StringUtils.isNotBlank(order)) {
             if ("ASC".equalsIgnoreCase(order)) {
-                this.page.setAscs(sidx);
+                this.page.setAsc(sidx);
             } else {
-                this.page.setDescs(sidx);
+                this.page.setDesc(sidx);
             }
         }
     }

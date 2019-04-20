@@ -21,7 +21,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictDao, SysDictEntity> i
     public PageUtils queryPage(Map<String, Object> params) {
         String name = (String) params.get("name");
 
-        IPage<SysDictEntity> page = this.selectPage(
+        IPage<SysDictEntity> page = this.page(
                 new Query<SysDictEntity>(params).getPage(),
                 new QueryWrapper<SysDictEntity>()
                         .like(StringUtils.isNotBlank(name), "name", name)

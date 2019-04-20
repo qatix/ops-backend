@@ -21,7 +21,7 @@ public class PhoneServiceImpl extends ServiceImpl<PhoneDao, PhoneEntity> impleme
     public PageUtils queryPage(Map<String, Object> params) {
         String key = (String) params.get("key");
 
-        IPage<PhoneEntity> page = this.selectPage(
+        IPage<PhoneEntity> page = this.page(
                 new Query<PhoneEntity>(params).getPage(),
                 new QueryWrapper<PhoneEntity>()
                         .like(StringUtils.isNotBlank(key), "channel", key)

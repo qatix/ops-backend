@@ -29,7 +29,7 @@ public class CountryController {
 
     @GetMapping("/all")
     public R allChannels(@RequestParam Map<String, Object> params) {
-        List<CountryEntity> countryList = countryService.selectList(new QueryWrapper<CountryEntity>());
+        List<CountryEntity> countryList = countryService.list(new QueryWrapper<CountryEntity>());
 
         return R.ok().put("data", countryList);
     }
@@ -52,7 +52,7 @@ public class CountryController {
     @RequestMapping("/info/{id}")
     @RequiresPermissions("base:country:info")
     public R info(@PathVariable("id") Integer id) {
-        CountryEntity country = countryService.selectById(id);
+        CountryEntity country = countryService.getById(id);
 
         return R.ok().put("data", country);
     }
@@ -63,7 +63,7 @@ public class CountryController {
     @RequestMapping("/save")
     @RequiresPermissions("base:country:save")
     public R save(@RequestBody CountryEntity country) {
-        countryService.insert(country);
+        countryService.save(country);
 
         return R.ok();
     }
@@ -86,7 +86,7 @@ public class CountryController {
     @RequestMapping("/delete")
     @RequiresPermissions("base:country:delete")
     public R delete(@RequestBody Integer[] ids) {
-        countryService.deleteBatchIds(Arrays.asList(ids));
+        countryService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

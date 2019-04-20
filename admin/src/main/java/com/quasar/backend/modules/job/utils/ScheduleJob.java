@@ -72,7 +72,7 @@ public class ScheduleJob extends QuartzJobBean {
             sjlEntity.setStatus(1);
             sjlEntity.setError(StringUtils.substring(e.toString(), 0, 2000));
         } finally {
-            scheduleJobLogService.insert(sjlEntity);
+            scheduleJobLogService.save(sjlEntity);
         }
     }
 }

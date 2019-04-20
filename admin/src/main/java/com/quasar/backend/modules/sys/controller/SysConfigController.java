@@ -44,7 +44,7 @@ public class SysConfigController extends AbstractController {
     @RequestMapping("/info/{id}")
     @RequiresPermissions("sys:config:info")
     public R info(@PathVariable("id") Long id) {
-        SysConfigEntity config = sysConfigService.selectById(id);
+        SysConfigEntity config = sysConfigService.getById(id);
 
         return R.ok().put("data", config);
     }
@@ -58,7 +58,7 @@ public class SysConfigController extends AbstractController {
     public R save(@RequestBody SysConfigEntity config) {
         ValidatorUtils.validateEntity(config);
 
-        sysConfigService.save(config);
+        sysConfigService.saveOne(config);
 
         return R.ok();
     }
@@ -72,7 +72,7 @@ public class SysConfigController extends AbstractController {
     public R update(@RequestBody SysConfigEntity config) {
         ValidatorUtils.validateEntity(config);
 
-        sysConfigService.update(config);
+        sysConfigService.updateOne(config);
 
         return R.ok();
     }
