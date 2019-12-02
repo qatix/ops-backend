@@ -4,4 +4,21 @@
 <mapper namespace="com.quasar.backend.modules.job.dao.ScheduleJobLogDao">
 
 
+    <select id="selectCountByHour"
+            resultType="com.quasar.backend.modules.job.entity.TaskHourStat">
+        select count(*) as cnt,bean_name as BeanName,date_format(create_time,'%Y-%m-%d-%H') as date from  schedule_job_log
+         where create_time &gt;= #{startDate}
+         and  create_time &lt;= #{endDate}
+        group by date
+    </select>
+
+
+    <select id="selectCountByMinute"
+            resultType="com.quasar.backend.modules.job.entity.TaskMinuteStat">
+        select count(*) as cnt,bean_name as BeanName,date_format(create_time,'%Y-%m-%d-%H-%i') as date from  schedule_job_log
+        where create_time &gt;= #{startDate}
+        and  create_time &lt;= #{endDate}
+        group by date
+    </select>
+
 </mapper>
