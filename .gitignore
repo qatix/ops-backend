@@ -49,3 +49,4 @@ dist/
 nbdist/
 .nb-gradle/
 logs/
+*.DS_Store

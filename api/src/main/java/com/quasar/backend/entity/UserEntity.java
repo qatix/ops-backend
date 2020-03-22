@@ -4,8 +4,10 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,6 +23,8 @@ import java.util.Date;
  */
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName("tb_user")
 public class UserEntity implements Serializable {
 	private static final long serialVersionUID = 1L;

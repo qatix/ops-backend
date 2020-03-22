@@ -1,0 +1,25 @@
+<assembly>
+    <id>release</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+
+    <fileSets>
+        <fileSet>
+            <directory>${project.basedir}/target</directory>
+            <outputDirectory>/target</outputDirectory>
+            <includes>
+                <include>*.jar</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>${project.basedir}/bin</directory>
+            <outputDirectory>/target/bin</outputDirectory>
+            <includes>
+                <include>*.sh</include>
+            </includes>
+            <fileMode>0755</fileMode>
+        </fileSet>
+    </fileSets>
+</assembly>
