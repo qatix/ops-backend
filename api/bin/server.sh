@@ -1,14 +1,25 @@
 #!/bin/bash
 
-env_path=$(dirname $0)/../../env.sh
+
+env_path=$(dirname $0)/../env.sh
 if [ -f $env_path ]; then
     source $env_path
 fi
 
-NAME=admin
+NAME=api
+JAVA_JAR=target/"$NAME".jar
 JAVA_CMD=`which java`
-JAVA_PARAMS="-Dspring.profiles.active=$SERVER_ENV -Dserver.port=$SERVER_PORT $JVM_PARAMS -jar"
-JAVA_JAR="$NAME".jar
+JAVA_PARAMS=''
+if [ $SERVER_ENV ]; then
+  JAVA_PARAMS="$JAVA_PARAMS -Dspring.profiles.active=$SERVER_ENV"
+fi
+if [ $SERVER_PORT ]; then
+  JAVA_PARAMS="$JAVA_PARAMS -Dserver.port=$SERVER_PORT"
+fi
+if [ 0"$JVM_PARAMS" != "0" ]; then
+  JAVA_PARAMS="$JAVA_PARAMS $JVM_PARAMS"
+fi
+JAVA_PARAMS="$JAVA_PARAMS -jar"
 
 case "`uname`" in
     Linux)
@@ -26,7 +37,7 @@ if [ ! -d "logs" ]; then
   mkdir logs
 fi
 
-PID_FILE=/home/service/var/"${NAME}"_server.pid
+PID_FILE=/tmp/"${NAME}"_server.pid
 
 check_running() {
     PID=0
