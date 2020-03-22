@@ -43,12 +43,11 @@ mybatis-plus:
       #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
       field-strategy: not_empty
       #驼峰下划线转换
-      column-underline: true
-      #数据库大写下划线转换
       #capital-mode: true
       #逻辑删除配置
       logic-delete-value: 0
       logic-not-delete-value: 1
+      table-underline: true
 
     refresh: true
       #自定义填充策略接口实现

@@ -8,12 +8,15 @@ import com.quasar.backend.common.utils.Query;
 import com.quasar.backend.modules.base.dao.CountryDao;
 import com.quasar.backend.modules.base.entity.CountryEntity;
 import com.quasar.backend.modules.base.service.CountryService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.Map;
 
-
+@Slf4j
 @Service("countryService")
 public class CountryServiceImpl extends ServiceImpl<CountryDao, CountryEntity> implements CountryService {
 
@@ -34,4 +37,13 @@ public class CountryServiceImpl extends ServiceImpl<CountryDao, CountryEntity> i
         return new PageUtils(page);
     }
 
+    @PreDestroy
+    public void destroy() {
+        log.info("service pre destroy");
+    }
+
+    @PostConstruct
+    public void afterConstruct() {
+        log.info("service after construct");
+    }
 }

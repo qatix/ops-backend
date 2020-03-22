@@ -4,7 +4,7 @@ NAME=admin
 JAVAPROJS=/home/pubsrv/javaprojs/
 EXECUTEDIR=/home/pubsrv/javaprojs/opsbackend
 JAVA_CMD=/usr/local/jdk8/bin/java
-JAVA_PARAMS="-Dspring.profiles.active=prod-india -Dserver.port=9010 -Xms1g -Xmx1g  -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError -XX:+DisableExplicitGC -jar"
+JAVA_PARAMS="-Dspring.profiles.active=prod -Dserver.port=9010 -Xms1g -Xmx1g  -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+UseCMSInitiatingOccupancyOnly -XX:+HeapDumpOnOutOfMemoryError -XX:+DisableExplicitGC -jar"
 JAVA_JAR="$NAME".jar
 DATETIME_NOW=`date '+%Y-%m-%d-%H:%M:%S'`
 
@@ -79,7 +79,7 @@ stop() {
         echo "$NAME is running as $PID, stopping it..."
         # 因为服务器使用了多进程模式，需要给所有子进程发送信号
         # ps --ppid $PID -o pid h | xargs kill -9
-        kill -9 $PID
+        kill $PID
     else
         echo "$NAME is not running, do nothing"
     fi
