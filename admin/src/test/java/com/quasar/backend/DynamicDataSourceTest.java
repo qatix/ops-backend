@@ -23,13 +23,6 @@ public class DynamicDataSourceTest {
         SysUserEntity user1 = dataSourceTestService.queryUser(1L);
         System.out.println(ToStringBuilder.reflectionToString(user1));
 
-        //数据源2
-        SysUserEntity user2 = dataSourceTestService.queryUser2(1L);
-        System.out.println(ToStringBuilder.reflectionToString(user2));
-
-        //数据源1
-        SysUserEntity user3 = dataSourceTestService.queryUser(1L);
-        System.out.println(ToStringBuilder.reflectionToString(user3));
     }
 
 }

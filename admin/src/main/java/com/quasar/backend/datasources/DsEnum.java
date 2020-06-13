@@ -10,11 +10,7 @@ public enum DsEnum {
     /**
      * 默认数据源
      */
-    FIRST("first"),
-    /**
-     * 终端原先使用的数据库
-     */
-    TERMINAL("terminal");
+    FIRST("first");
 
     private String value;
 

@@ -12,7 +12,7 @@ server:
 spring:
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
-        driverClassName: com.mysql.jdbc.Driver
+        driverClassName: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://localhost:3306/opsbackend?useUnicode=true&characterEncoding=UTF-8&useSSL=false
         username: root
         password: 123456

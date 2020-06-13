@@ -26,19 +26,12 @@ public class DynamicDataSourceConfig {
         return DruidDataSourceBuilder.create().build();
     }
 
-    @Bean(name = "terminal_db")
-    @ConfigurationProperties("spring.datasource.druid.second")
-    public DataSource terminalDataSource() {
-        return DruidDataSourceBuilder.create().build();
-    }
 
     @Bean
     @Primary
-    public DynamicDataSource dataSource(@Qualifier("first_db") DataSource firstDataSource,
-                                        @Qualifier("terminal_db") DataSource terminalDataSource) {
+    public DynamicDataSource dataSource(@Qualifier("first_db") DataSource firstDataSource) {
         Map<Object, Object> targetDataSources = new HashMap<>();
         targetDataSources.put(DsEnum.FIRST.getValue(), firstDataSource);
-        targetDataSources.put(DsEnum.TERMINAL.getValue(), terminalDataSource);
         return new DynamicDataSource(firstDataSource, targetDataSources);
     }
 }

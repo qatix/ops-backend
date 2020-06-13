@@ -71,7 +71,6 @@ public class CommonController {
      * 使用第二个数据源
      * @return
      */
-    @DataSource(name = DsEnum.TERMINAL)
     @RequestMapping("/model_list2")
     public R getModelList2() {
         List<PhoneEntity> phoneEntityList = phoneService.list();

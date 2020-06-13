@@ -19,7 +19,7 @@ import java.util.Map;
  * 机型信息
  *
  * @author Logan
- * @email hawk418@qq.com
+ *
  * @date 2018-08-27 18:02:48
  */
 @RestController

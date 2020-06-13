@@ -16,7 +16,6 @@ import java.util.Date;
  * ${comments}
  * 
  * @author ${author}
- * @email ${email}
  * @date ${datetime}
  */
 @Data
