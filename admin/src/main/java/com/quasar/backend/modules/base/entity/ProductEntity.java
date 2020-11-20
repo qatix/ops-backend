@@ -13,7 +13,6 @@ import java.util.Date;
  * 商品
  *
  * @author Logan
- *
  * @date 2018-10-13 11:11:14
  */
 @Data

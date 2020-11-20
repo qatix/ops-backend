@@ -2,8 +2,8 @@
 server:
   tomcat:
     uri-encoding: UTF-8
-    max-threads: 111
-    min-spare-threads: 30
+    max-threads: 500
+    min-spare-threads: 200
   port: 8081
   servlet:
     context-path: /api

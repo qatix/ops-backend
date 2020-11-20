@@ -16,7 +16,6 @@ import java.util.Map;
  * 商品
  *
  * @author Logan
- *
  * @date 2018-10-13 11:11:14
  */
 @RestController
@@ -30,7 +29,7 @@ public class ProductController {
      */
     @GetMapping("/list")
     @RequiresPermissions("base:product:list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = productService.queryPage(params);
 
         return R.ok().put("data", page);
@@ -42,7 +41,7 @@ public class ProductController {
      */
     @GetMapping("/info/{id}")
     @RequiresPermissions("base:product:info")
-    public R info(@PathVariable("id") Integer id){
+    public R info(@PathVariable("id") Integer id) {
         ProductEntity product = productService.getById(id);
 
         return R.ok().put("data", product);
@@ -53,7 +52,7 @@ public class ProductController {
      */
     @PostMapping("/save")
     @RequiresPermissions("base:product:save")
-    public R save(@RequestBody ProductEntity product){
+    public R save(@RequestBody ProductEntity product) {
         productService.save(product);
 
         return R.ok();
@@ -64,10 +63,10 @@ public class ProductController {
      */
     @PostMapping("/update")
     @RequiresPermissions("base:product:update")
-    public R update(@RequestBody ProductEntity product){
+    public R update(@RequestBody ProductEntity product) {
         ValidatorUtils.validateEntity(product);
         productService.updateById(product);//全部更新
-        
+
         return R.ok();
     }
 
@@ -76,7 +75,7 @@ public class ProductController {
      */
     @PostMapping("/delete")
     @RequiresPermissions("base:product:delete")
-    public R delete(@RequestBody Integer[] ids){
+    public R delete(@RequestBody Integer[] ids) {
         productService.removeByIds(Arrays.asList(ids));
 
         return R.ok();

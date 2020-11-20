@@ -10,7 +10,6 @@ import java.util.Map;
  * 审核日志
  *
  * @author Logan
- *
  * @date 2020-06-13 18:59:50
  */
 public interface AuditLogService extends IService<AuditLogEntity> {

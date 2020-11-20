@@ -1,7 +1,6 @@
 package com.quasar.backend.modules.base.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
-import com.baomidou.mybatisplus.core.enums.IEnum;
 
 /**
  * @author logan

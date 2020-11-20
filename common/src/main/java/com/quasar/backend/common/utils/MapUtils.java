@@ -16,4 +16,8 @@ public class MapUtils extends HashMap<String, Object> {
         super.put(key, value);
         return this;
     }
+
+    public MapUtils build(){
+        return new MapUtils();
+    }
 }

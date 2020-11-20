@@ -14,10 +14,6 @@ public enum AuditResultType {
         this.val = val;
     }
 
-    public String getVal() {
-        return val;
-    }
-
     public static AuditResultType fromValue(String val) {
         for (AuditResultType type : values()
         ) {
@@ -26,5 +22,9 @@ public enum AuditResultType {
             }
         }
         return null;
+    }
+
+    public String getVal() {
+        return val;
     }
 }

@@ -18,7 +18,7 @@ public class StatTask {
     private ScheduleJobLogDao scheduleJobLogDao;
 
 
-    public void doTask(){
+    public void doTask() {
         FilterParam fp = new FilterParam();
         fp.setStartDate("2019-11-01 00:00:00");
         fp.setEndDate("2019-12-12 00:00:00");
@@ -28,7 +28,7 @@ public class StatTask {
     }
 
 
-    public void doMinuteTask(){
+    public void doMinuteTask() {
         FilterParam fp = new FilterParam();
         fp.setStartDate("2019-11-01 00:00:00");
         fp.setEndDate("2019-12-12 00:00:00");

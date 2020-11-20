@@ -10,7 +10,6 @@ import java.util.Map;
  * 机型信息
  *
  * @author Logan
- *
  * @date 2018-08-27 18:02:48
  */
 public interface PhoneService extends IService<PhoneEntity> {

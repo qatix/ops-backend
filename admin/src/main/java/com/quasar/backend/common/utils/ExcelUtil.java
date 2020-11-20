@@ -25,7 +25,7 @@ public class ExcelUtil {
 
         CSVWriter csvWriter = new CSVWriter(writer);
         for (String[] data : dataList
-                ) {
+        ) {
             csvWriter.writeNext(data);
         }
         csvWriter.close();

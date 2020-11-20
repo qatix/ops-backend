@@ -7,7 +7,6 @@ import com.quasar.backend.modules.base.entity.CountryEntity;
  * 国家
  *
  * @author Logan
- *
  * @date 2018-08-23 21:10:23
  */
 public interface CountryDao extends BaseMapper<CountryEntity> {

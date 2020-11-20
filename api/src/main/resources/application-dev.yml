@@ -31,3 +31,18 @@ spring:
         wall:
           config:
             multi-statement-allow: true
+  boot:
+    admin:
+      client:
+        url: http://localhost:8087
+management:
+  endpoints:
+    web:
+      exposure:
+        include: beans,metrics,info,health,loggers
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+

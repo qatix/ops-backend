@@ -5,7 +5,6 @@ import com.quasar.backend.common.utils.PageUtils;
 import com.quasar.backend.common.utils.R;
 import com.quasar.backend.common.validator.ValidatorUtils;
 import com.quasar.backend.modules.base.entity.PhoneEntity;
-import com.quasar.backend.modules.base.enums.PhoneType;
 import com.quasar.backend.modules.base.service.PhoneService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import java.util.Map;
  * 机型信息
  *
  * @author Logan
- *
  * @date 2018-08-27 18:02:48
  */
 @RestController
@@ -85,7 +83,7 @@ public class PhoneController {
     @RequestMapping("/update")
     @RequiresPermissions("base:phone:update")
     public R update(@RequestBody PhoneEntity phone) {
-        System.out.println("update:"+phone.toString());
+        System.out.println("update:" + phone.toString());
         ValidatorUtils.validateEntity(phone);
         phoneService.updateById(phone);//全部更新
 

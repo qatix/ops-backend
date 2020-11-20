@@ -1,8 +1,6 @@
 package com.quasar.backend.modules.base.controller;
 
 import com.quasar.backend.common.utils.R;
-import com.quasar.backend.datasources.DsEnum;
-import com.quasar.backend.datasources.annotation.DataSource;
 import com.quasar.backend.modules.base.entity.CountryEntity;
 import com.quasar.backend.modules.base.entity.PhoneEntity;
 import com.quasar.backend.modules.base.service.CountryService;
@@ -69,6 +67,7 @@ public class CommonController {
 
     /**
      * 使用第二个数据源
+     *
      * @return
      */
     @RequestMapping("/model_list2")

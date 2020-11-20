@@ -20,12 +20,20 @@ import java.util.concurrent.TimeUnit;
 @RestController
 public class MemoryTstController {
 
+    public class BigObject{
+        byte[] data;
+        public BigObject(int size){
+            data = new byte[size];
+        }
+    }
+
     @GetMapping("/createObj")
     public R createObj(@RequestParam(name = "count") Integer count,
                        @RequestParam(name = "size", required = false, defaultValue = "1024000") Integer size) {
         Stopwatch stopwatch = Stopwatch.createStarted();
+        List<BigObject> bigObjectList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            byte[] allocation1 = new byte[size];
+                bigObjectList.add(new BigObject(size));
         }
 
         MapUtils mapUtils = new MapUtils();
@@ -55,7 +63,6 @@ public class MemoryTstController {
         }
         return R.ok().put("gc-timecost", stopwatch.elapsed(TimeUnit.MILLISECONDS));
     }
-
 
     @GetMapping("/jit")
     public R testJitFunc(@RequestParam(name = "count") Integer count) {
